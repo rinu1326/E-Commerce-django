@@ -1,0 +1,220 @@
+{% include "inc/navbar.html" %}
+
+<br> <br> <br> 
+<div class="contact-container">
+    
+
+    <form action="/contact" method="POST" class="contact-left">
+      
+            <h2>Get in Touch</h2>
+            {% csrf_token %}
+            <div class="contact-left-title">
+                {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+            <hr>
+        </div>
+       
+        <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
+        <input type="email" name="email" placeholder="Your Email" class="contact-inputs" value="{{user.email}}" required>
+        <input type="number" name="pnumber" placeholder="Your phone Name" class="contact-inputs" required>
+        <textarea name="desc" placeholder="Your Message" class="contact-inputs" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="contact-right">
+        <img src="your-image-url.jpg" alt="Contact Image">
+    </div>
+</div>
+
+
+
+
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap');
+  *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Jost', sans-serif;
+      list-style: none;
+  }
+      body{
+          font-family: 'Outfit';
+          background: linear-gradient(#ffdad5,#fff7f9);
+      }
+      .contact-container{
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .contact-left{
+          display: flex;
+          flex-direction: column;
+          align-items:start ;
+          gap: 20px;
+      }
+      .contact-left-title h2{
+          font-weight: 600;
+          color: #a363aa;
+          font-size: 40px;
+          margin-bottom: 5px;
+  
+      }
+      .contact-left-title hr{
+          border: none;
+          width: 120px;
+          height: 5px;
+          background-color: #a363aa;
+          border-radius: 10px;
+          margin-bottom:20px ;
+  
+      }
+      .contact-inputs{
+          width: 400px;
+          height:50px ;
+          border: none;
+          outline: none;
+          padding-left: 25px;
+          font-weight: 500;
+          color: #666;
+          border-radius: 50px;
+  
+  
+      }
+      .contact-left textarea{
+          height: 140px;
+          padding-top: 15px;
+          border-radius: 20px;
+  
+      }
+      .contact-inputs:focus{
+          border: 2px solid #ff994f;
+  
+      }
+      .contact-inputs::placeholder{
+          color:#a9a9a9 ;
+  
+      }
+      .contact-left button{
+          display: flex;
+          align-items: center;
+          padding: 15px 30px;
+          font-size: 16px;
+          font-size: 16px;
+          color: #fff;
+          gap: 10px;
+          border: none;
+          border-radius: 50px;
+          background: linear-gradient(270deg,#ff994f,#ff994f);
+          cursor: pointer;
+      }
+      .contact-left button img{
+          height: 15px;
+      }
+      .contact-right img{
+          width: 500px;
+        }
+   @media (max-width:800px) {
+      .contact-inputs{
+          width: 80vw;
+      }
+      .contact-right{
+          display: none;
+      }
+  }  
+  
+  
+
+  .bn46 {
+    width: 150px;
+    height: 50px;
+  }
+  .bn45 {
+    width: 170px;
+    height: 50px;
+  }
+  .contact{
+    background-color: #fff;
+  }
+  .contact-info{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,auto));
+    gap: 3rem;
+  }
+  .first-info{
+    width: 140px;
+    height: auto;
+  }
+  .contact-info h4{
+    color: #212529;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .contact-info p{
+    color: #565656;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all .42s;
+  }
+  .contact-info p:hover{
+    color: #ee1c47;
+  }
+  .social-icon i{
+    color: #565656;
+    margin-right: 10px;
+    font-size: 20px;
+    transition: all .42s;
+  }
+  .social-icon i:hover{
+    transform: scale(1.3);
+  }
+  
+  .left-col{
+    float: left;
+    margin-left: 7%;
+     margin-bottom: 240px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .left-col h4{
+    padding-bottom: 15px;
+  }
+  .left-col h1{
+    color: #088178;
+  }
+  .left-col button{
+    background-color: transparent;
+    color: #088178;
+    border: 0;
+    padding: 14px 80px 14px 65px;
+    font-weight: 700;
+    font-size: 15px;
+  
+  }
+  
+</style>
+ 
+
+
+
+
+
+
+
+
+
+
+
+{% include "inc/footer.html" %}

@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "./css/style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static '/path/to/flickity.css' %}" media="screen">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+</head>
+<body class="container-fluid">
+
+ {% comment %} <div  id="preloader"></div>  {% endcomment %}
+
+    
+
+    <header class="sticky">
+        <a href="#" class="logo"><img src="{% static './images/logo (1).png' %}" alt=""></a>
+        <ul class="navmenu">
+            <li><a href="/">Home</a></li>
+           
+           
+            
+              
+            {% if request.path != '/checkout/' %}
+            <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        {% endif %}
+            {% if  request.user.is_authenticated %}
+            <li><a href="/profile">profile</a></li>
+            <li><a href="/auth/logout">logout</a></li>
+           
+            {% else %}
+            <li class="dropdown">
+            
+                <a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/auth/signup">Sign up</a></li>
+                    <li><a href="/auth/login">Login</a></li>
+                    
+                </ul>
+            </li>
+            
+              </li>
+            {% endif %}
+           
+            
+            <li><a href="/contact">Contact</a></li>
+            
+        </ul>
+        <div class="nav-icon">
+            <a href="#" onclick="dark()"><i class='bx bx-search'></i></a>
+            <a href="login.html"><i class='bx bx-user'></i></a>
+            {% comment %} <a href="#"><i class='bx bx-cart bg-danger p-1'></i></a> {% endcomment %}
+            <button type="button" class="btn-custom" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true">
+                <i class='bx bx-cart'></i>  <span id="cart" class="cart-badge">0</span>
+            </button>
+            <div class="bx bx-menu" id="menu-icon"></div>
+            
+              
+          
+
+            
+           
+            
+           
+        </div>
+    
+        
+    
+        
+    </header>
+
+<!-- 
+    for loader -->
+
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> 
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/n4EOjUhZjss?si=6
+    QtKNqbBbB3FPKyV" title="YouTube video player" frameborder="0" allow="accelerometer; 
+    autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+
+    
+ 
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"  >
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+     
+                <img src="{% static './images/slide6.jpg' %}" class="d-block w-100 h-100" alt="...">
+                <div class="carousel-caption d-none d-md-block custom-caption">
+                  <div class="left-col">
+                    <!-- <h4>Trde-in-offer</h4>
+                    <h2>Super value deals</h2>
+                    <h1>on all products</h1>
+                    <p>Save more with coupens & up to 70% off!</p>
+                        <button>shop now</button> -->
+                   </div>
+                </div>
+              </div>
+
+          <div class="carousel-item">
+            <img src="{% static './images/slide5-2.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="left-col"> 
+                <!-- <h4>Trde-in-offer</h4> -->
+                <!-- <h2>Super value deals</h2>
+                <h1>on all products</h1>
+                <p>Save more with coupens & up to 70% off!</p>
+                    <button>shop now</button> -->
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="carousel-item">
+            <img src="{% static './images/slide6-2.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="left-col"> 
+                <!-- <h4>Trde-in-offer</h4>
+                <h2>Super value deals</h2>
+                <h1>on all products</h1>
+                <p>Save more with coupens & up to 70% off!</p>
+                    <button>shop now</button> -->
+                </div>
+            </div>
+          </div>
+        </div>
+      
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div> 
+
+             
+      {% block content %}
+    
+      {% endblock content %}
+  
+<div id="loader"></div>
+
+  
+
+      
+
+      
+
+
+
+  
+<!-- Swiper JS -->
+
+<div class="features" data-aos="fade-right"
+data-aos-offset="300"
+data-aos-easing="ease-in-sine">
+  <div class="feature">
+      <img src="{% static './images/shipping.png' %}" alt="" class="featureicon">
+      <span class="featuretitle">FREE SHIPPING</span>
+      <span class="featured-desription">Free worldwide shipping on all orders</span>
+  </div>
+  <div class="feature">
+      <img src="{% static './images/return.png' %}" alt="" class="featureicon">
+      <span class="featuretitle">30 DAYS RETURN</span>
+      <span class="featured-desription">No question return and easy refund in 14 days</span>
+  </div>
+  <div class="feature">
+      <img src="{% static './images/gift.png' %}" alt="" class="featureicon">
+      <span class="featuretitle">GIFT CARD</span>
+      <span class="featured-desription">buy gift cards and use couprn codes easily</span>
+  </div>
+  <div class="feature">
+      <img src="{% static './images/contact.png' %}" alt="" class="featureicon">
+      <span class="featuretitle">CONTACT US</span>
+      <span class="featured-desription">keep in touch via email and support system</span>
+  </div>
+</div>
+
+
+<!-- new collection starts from here -->
+
+
+{% block body %}
+
+
+
+{% endblock body %}
+
+
+<div class="exban mt-5" style="background-image: url('{% static './images/b1.jpg' %}');" data-aos="fade-right"
+data-aos-offset="300"
+data-aos-easing="ease-in-sine">
+  <h4>exclusive offer</h4>
+  <h2>up to <span>70%off</span> -All t-shirt & Accessories</h2>
+</div>
+  
+<!-- new collection starts from here -->
+
+     
+
+
+
+
+
+
+
+
+
+<div class="newsletter_wrap">
+    <div class="container" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
+        <div class="newsletter_box">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <span>Subscribe Newsletter</span>
+                    <h2>Subscribe to recieve daily news</h2>
+                </div>
+                <div class="col-lg-7">
+                    <form>
+                        <div class="subscribe_form">
+                            <input type="text" placeholder="Email here" required>
+                            <button>Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+  <!-- contact section -->
+
+
+<!-- footer section -->
+
+<footer class="contact">
+    <div class="contact-info">
+        <div class="first-info">
+            <img src="./images/logo (1).png" alt="">
+            <p>5465 newyork city <br>tx united states 647474</p>
+            <p>08564367896</p>
+            <p>david@gmail.com</p>
+
+            <div class="social-icon">
+                <a href=""><i class='bx bxl-facebook'></i></a>
+                <a href=""><i class='bx bxl-twitter'></i></a>
+                <a href=""><i class='bx bxl-instagram'></i></a>
+                <a href=""><i class='bx bxl-youtube'  ></i></a>
+               
+            </div>
+        </div>
+        <div class="second-info">
+            <h4>SUPPORT</h4>
+            <p>contact us</p>
+            <p>about page</p>
+            <p>size guide</p>
+            <p>shopping$ return</p>
+            <p>privacy</p>
+        </div>
+        <div class="third-info">
+            <h4>SHOP</h4>
+            <p>mens shop</p>
+            <p>womens shopping</p>
+            <p>discount</p>
+            <p>free product</p>
+        </div>
+        <div class="fourth-info">
+            <h4>COMPONY</h4>
+            <p>about</p>
+            <p>blog</p>
+            <p>affliate</p>
+            <p>login</p>
+        </div>
+        <div class="five">
+            <h4>SUBSCRIBE</h4>
+            <p>recive update, hot deals discount sent straitght in your bo</p>
+            <p>recive update, hot deals discount sent straitght in your bo</p>
+            <p>recive update, hot deals discount sent straitght in your box daily</p>
+            <br>
+            <a href="/" tabIndex="0"><img class="bn45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="bn45"/></a>
+
+            <a href="/" tabIndex="0"><img class="bn46" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"alt="bn45"/></a>
+
+        </div>
+    </div>
+
+</footer>
+
+<style>
+    .btn-custom {
+        position: relative;
+        background-color: white !important;
+        
+        /* Other styling for the button */
+    }
+    
+    .cart-badge {
+        position: absolute;
+        top: -10px; /* Adjust to position higher above the icon */
+        right: -10px; /* Adjust to position to the right of the icon */
+        background-color: red; /* Badge background color */
+        color: white; /* Badge text color */
+        border-radius: 50%; /* Rounded badge */
+        padding: 4px 4px; /* Adjust padding for badge size */
+        font-size: 12px; /* Font size for badge text */
+        line-height: 1; /* Line height for badge text */
+        font-weight: bold; /* Bold text for visibility */
+        display: inline-block;
+        min-width: 20px; /* Ensures badge is circular or oval */
+        text-align: center;
+        vertical-align: middle;
+    }
+/* Hover effect for button */
+.btn-custom:hover {
+    background-color: #c82333; /* Darker shade of danger color */
+}
+
+/* Icon styles */
+.btn-custom i {
+    margin-right: 0.5rem; /* Space between icon and text */
+    font-size: 1.2rem; /* Icon size */
+    overflow: hidden;
+}
+
+</style>
+
+<!-- foooter section end -->
+
+<script src="{% static './js/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</script>
+<script>
+    AOS.init();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdown = document.querySelector('.dropdown');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+    
+        dropdown.addEventListener('mouseenter', function() {
+            dropdownMenu.style.display = 'block';
+        });
+    
+        dropdown.addEventListener('mouseleave', function() {
+            dropdownMenu.style.display = 'none';
+        });
+    });
+    
+    </script>
+
+    
+</body>
+</html>
+
+

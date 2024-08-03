@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "./css/style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static '/path/to/flickity.css' %}" media="screen">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="container-fluid">
+
+ {% comment %} <div  id="preloader"></div>  {% endcomment %}
+
+    
+ <header class="sticky">
+    <a href="#" class="logo"><img src="{% static './images/logo (1).png' %}" alt=""></a>
+    <ul class="navmenu">
+        <li><a href="/">Home</a></li>
+       
+       
+        
+
+        {% if  request.user.is_authenticated %}
+        <li><a href="/profile">profile</a></li>
+        <li><a href="/auth/logout">logout</a></li>
+          
+        {% if request.path != '/checkout/' %}
+        <li><a href="{% url 'checkout' %}">Checkout</a></li>
+    {% endif %}
+        {% else %}
+        <li class="dropdown">
+        
+            <a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="/auth/signup">Sign up</a></li>
+                <li><a href="/auth/login">Login</a></li>
+                
+            </ul>
+        </li>
+        
+          </li>
+        {% endif %}
+       
+        
+        <li><a href="/contact">Contact</a></li>
+        
+    </ul>
+    <div class="nav-icon">
+        <a href="#" onclick="dark()"><i class='bx bx-search'></i></a>
+        <a href="login.html"><i class='bx bx-user'></i></a>
+        {% comment %} <a href="#"><i class='bx bx-cart bg-danger p-1'></i></a> {% endcomment %}
+        <button type="button" class="btn-custom" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true">
+            <i class='bx bx-cart'></i>  <span id="cart" class="cart-badge">0</span>
+        </button>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        
+          
+      
+
+        
+       
+        
+       
+    </div>
+
+    
+
+    
+</header>
+
+
+<style>
+    .btn-custom {
+        position: relative;
+        background-color: white !important;
+        
+        /* Other styling for the button */
+    }
+    
+    .cart-badge {
+        position: absolute;
+        top: -10px; /* Adjust to position higher above the icon */
+        right: -10px; /* Adjust to position to the right of the icon */
+        background-color: red; /* Badge background color */
+        color: white; /* Badge text color */
+        border-radius: 50%; /* Rounded badge */
+        padding: 4px 4px; /* Adjust padding for badge size */
+        font-size: 12px; /* Font size for badge text */
+        line-height: 1; /* Line height for badge text */
+        font-weight: bold; /* Bold text for visibility */
+        display: inline-block;
+        min-width: 20px; /* Ensures badge is circular or oval */
+        text-align: center;
+        vertical-align: middle;
+    }
+/* Hover effect for button */
+.btn-custom:hover {
+    background-color: #c82333; /* Darker shade of danger color */
+}
+
+/* Icon styles */
+.btn-custom i {
+    margin-right: 0.5rem; /* Space between icon and text */
+    font-size: 1.2rem; /* Icon size */
+    overflow: hidden;
+}
+
+</style>
