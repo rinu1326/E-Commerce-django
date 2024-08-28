@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhitenoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -123,6 +126,12 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,('static'))
 
 ]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+
+RAZORPAY_API_KEY = os.environ.get('RAZORPAY_API_KEY', 'rzp_test_X6uVA1Ff0ddxCQ')
+RAZORPAY_API_SECRET = os.environ.get('RAZORPAY_API_SECRET', 'OoenR6ZzEIo9kHXXOJBVI2jx')
+
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT =os.path.join(BASE_DIR,"media")

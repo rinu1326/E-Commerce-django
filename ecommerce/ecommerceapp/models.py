@@ -56,3 +56,41 @@ class OrderUpdate(models.Model):
 
     def __str__(self):
         return self.update_desc[0:7] + "..."
+
+
+
+
+class Order(models.Model):
+    razorpay_order_id = models.CharField(max_length=100, unique=True)
+    amount = models.IntegerField()
+    currency = models.CharField(max_length=10)
+    is_paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.razorpay_order_id
+
+
+
+
+
+
+
+
+class Order3(models.Model):
+    items_json = models.TextField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    address1 = models.CharField(max_length=200)
+    address2 = models.CharField(max_length=200, blank=True)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    zip_code = models.CharField(max_length=10)
+    phone = models.CharField(max_length=15)
+    razorpay_order_id = models.CharField(max_length=100, blank=True)
+    razorpay_payment_id = models.CharField(max_length=100, blank=True)
+    razorpay_signature = models.CharField(max_length=100, blank=True)
+    ordered_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

@@ -7,7 +7,9 @@ urlpatterns = [
     path('contact',views.contact,name="contact"),
     path('checkout/',views.checkout,name="checkout"),
     path('profile',views.profile,name="profile"),
-    path('handlerequest/', views.handlerequest, name="HandleRequest"),
+    path('verify_payment/', views.verify_payment, name='verify_payment'),
+    path('order-confirmation/', views.order_confirmation, name='order_confirmation'), 
+   
    
 
 ]
